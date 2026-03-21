@@ -1,0 +1,16 @@
+[
+  {
+    "id": "file_task_1",
+    "payload": {
+      "type": "file",
+      "content": "data1"
+    }
+  },
+  {
+    "id": "file_task_2",
+    "payload": {
+      "type": "file",
+      "content": "data2"
+    }
+  }
+]
