@@ -1,11 +1,18 @@
-import pytest
 import json
-import tempfile
 import os
-import sys
+import tempfile
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from src.main import Task, TaskSource, FileTaskSource, GeneratorTaskSource, APITaskSource, validate_task_source, process_task_sources
+import pytest
+
+from task_sources import (
+    APITaskSource,
+    FileTaskSource,
+    GeneratorTaskSource,
+    Task,
+    TaskSource,
+    process_task_sources,
+    validate_task_source,
+)
 
 
 def test_task_creation():

@@ -1,17 +1,57 @@
-# Task Sources
+## Реализовано:
 
-Duck typing и контрактное программирование.
+1. Источники задач и контракты (`Protocol`).
+2. Доменная модель `Task` с защитой инвариантов.
+3. Пользовательская коллекция `TaskQueue` с ленивой фильтрацией.
 
-## Источники задач
+## Источники задач и контракты
 
-- **FileTaskSource** — из JSON-файла
-- **GeneratorTaskSource** — программная генерация
-- **APITaskSource** — API-заглушка
+Файл: `src/task_sources.py`
 
-## Технологии
+- Описан контракт источника задач через `typing.Protocol`.
+- Использован `@runtime_checkable` для runtime-проверки контракта.
+- Реализованы источники:
+- `FileTaskSource` (чтение из JSON-файла)
+- `GeneratorTaskSource` (программная генерация задач)
+- `APITaskSource` (API-заглушка)
+- Реализована функция агрегации задач из разных источников.
 
-Python 3.12+, Protocol, runtime_checkable, pytest
+## Доменная модель с защитой инвариантов
+
+Файл: `src/task_model.py`
+
+- Реализована доменная модель `Task`.
+- Добавлены пользовательские `data-descriptor` для полей:
+- `task_id`
+- `description`
+- `priority`
+- `status`
+- Добавлены специализированные исключения валидации.
+- Реализованы вычисляемые свойства через `@property`.
+- Показано различие между `data` и `non-data` descriptor
+- (`public_label` можно затенить атрибутом экземпляра).
+
+## Пользовательская коллекция с ленивой фильтрацией
+
+Файл: `src/task_queue.py`
+
+- Реализована очередь задач `TaskQueue`.
+- Реализован собственный итератор `TaskQueueIterator`.
+- Поддерживается корректная семантика `StopIteration`.
+- Поддерживается повторный обход очереди.
+- Реализованы ленивые генераторные фильтры:
+- `filter_by_status(...)`
+- `filter_by_priority(...)`
+- `iter_pending()`
+- Коллекция совместима с `for`, `list`, `sum`.
 
 ## Тесты
 
-`pytest tests/ -v`
+- `tests/test_tasksSources.py`
+- `tests/test_task_model.py`
+- `tests/test_task_queue.py`
+
+## Запуск
+
+Команда запуска тестов:
+`pytest -v`
