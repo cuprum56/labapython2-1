@@ -5,14 +5,19 @@ from typing import Any
 
 
 class TaskValidationError(ValueError):
+    """Базовая ошибка валидации модели Task."""
 
 class InvalidTaskIdError(TaskValidationError):
+    """Некорректный идентификатор задачи."""
 
 class InvalidDescriptionError(TaskValidationError):
+    """Некорректное описание задачи."""
 
 class InvalidPriorityError(TaskValidationError):
+    """Некорректный приоритет задачи."""
 
 class InvalidStatusError(TaskValidationError):
+    """Некорректный статус задачи."""
 
 
 class DescriptorBase:
